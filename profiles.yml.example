@@ -1,0 +1,22 @@
+# Databricks Unity Catalog profiles.yml configuration
+
+practice_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: databricks
+      host: "dbc-a3e4d3c2-a6be.cloud.databricks.com"
+      http_path: "/sql/1.0/warehouses/4ddda803e24bf32d"
+      token: "<your_databricks_personal_access_token>"
+      catalog: "samra_catalog" # Or 'workspace', 'main'
+      schema: "default"        # Or 'bronze', 'silver', 'gold'
+      threads: 4
+
+    prod:
+      type: databricks
+      host: "dbc-a3e4d3c2-a6be.cloud.databricks.com"
+      http_path: "/sql/1.0/warehouses/4ddda803e24bf32d"
+      token: "{{ env_var('DATABRICKS_TOKEN') }}"
+      catalog: "samra_catalog"
+      schema: "gold"
+      threads: 8
